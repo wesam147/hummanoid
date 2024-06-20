@@ -1,6 +1,6 @@
 <?xml version='1.0'?>
 <robot name="myrobot" xmlns:xacro="http://www.ros.org/wiki/xacro">
-    <xacro:include filename="$(find lab_4)/urdf/my_robot.gazebo" />
+    <xacro:include filename="$(find hummanoid)/urdf/my_robot.gazebo" />
 
     <link name='chassis'>
         <pose>0 0 0.1 0 0 0</pose>

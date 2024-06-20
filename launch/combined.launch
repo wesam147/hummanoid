@@ -23,7 +23,7 @@ hummanoid)/urdf/my_robot.xacro'" />
 
     <node name="rviz" pkg="rviz" type="rviz" args="-d $(find hummanoid)/rviz/config.rviz"/>
 
-    <node pkg="tf" type="static_transform_publisher" name="chassis_to_base_frame" args="0 0 0 0 0 0 1 base_footprint base_link 100" />
+    <node pkg="tf" type="static_transform_publisher" name="chassis_to_base_frame" args="0 0 0 0 0 0 1 base_footprint chassis 100" />
 
     <node name="mapping" pkg="gmapping" type="slam_gmapping"> 
         <remap from="scan" to="/laser/scan"/>

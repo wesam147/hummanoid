@@ -1,0 +1,7 @@
+global_planner:
+  GlobalPlanner:
+    allow_unknown: true
+    default_tolerance: 0.0
+    use_dijkstra: false   # Set to false to use A*
+    use_grid_path: true
+    old_navfn_behavior: false

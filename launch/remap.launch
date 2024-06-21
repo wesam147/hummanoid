@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<launch>
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(find hummanoid)/worlds/my_world.world"/>
+        <arg name="paused" value="false" />
+        <arg name="use_sim_time" value="true" />
+        <arg name="gui" value="true" />
+        <arg name="recording" value="false" />
+        <arg name="debug" value="false" />
+    </include>
+    <param name="robot_description"
+        command="$(find xacro)/xacro '$(find 
+hummanoid)/urdf/my_robot.xacro'" />
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model"
+        args="-param robot_description 
+-urdf -model my_robot" output="screen" />
+    <param name="robot_description" command="xacro '$(find hummanoid)/urdf/my_robot.xacro'" />
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+        <param name="use_gui" value="False" />
+    </node>
+
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find hummanoid)/rviz/config.rviz"/>
+
+    <node pkg="tf" type="static_transform_publisher" name="chassis_to_base_frame" args="0 0 0 0 0 0 1 base_footprint chassis 100" />
+    
+    <node name="map_server" pkg="map_server" type="map_server" args="$(find hummanoid)/maps/map.yaml" />
+
+    <node name="mapping" pkg="gmapping" type="slam_gmapping"> 
+        <remap from="scan" to="/laser/scan"/>
+        <param name="base_frame" value="base_footprint"/>
+        <param name="map_update_interval" value="1.0"/>
+        
+    </node>
+    
+</launch>

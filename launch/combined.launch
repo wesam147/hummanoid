@@ -28,6 +28,8 @@ hummanoid)/urdf/my_robot.xacro'" />
     <node name="mapping" pkg="gmapping" type="slam_gmapping"> 
         <remap from="scan" to="/laser/scan"/>
         <param name="base_frame" value="base_footprint"/>
+        <param name="map_update_interval" value="1.0"/>
+        <param name="ogain" value="5.0"/>
         
     </node>
     
